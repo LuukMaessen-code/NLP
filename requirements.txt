@@ -6,3 +6,6 @@ langchain-ollama
 faiss-cpu
 ollama
 sentence-transformers
+transformers
+torch
+scikit-learn
