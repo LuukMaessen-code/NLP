@@ -25,7 +25,10 @@ else:
     vectorstore = FAISS.from_texts(["initial memory placeholder"], embedding_model)
 
 retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
-memory = VectorStoreRetrieverMemory(retriever=retriever)
+memory = VectorStoreRetrieverMemory(
+    retriever=retriever,
+    input_key="entry"  # Ensures memory uses the correct string for similarity search
+)
 
 # === LLM with conversation memory ===
 llm = OllamaLLM(model="llama3")
