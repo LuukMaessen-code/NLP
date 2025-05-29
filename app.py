@@ -1,8 +1,8 @@
 import streamlit as st
 from langchain.prompts import PromptTemplate
-from langchain_ollama import OllamaLLM, OllamaEmbeddings
+from langchain_ollama import OllamaLLM
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.memory import VectorStoreRetrieverMemory
 from langchain.chains import ConversationChain
 from langchain_core.runnables import RunnableParallel
@@ -13,7 +13,9 @@ if not os.path.exists("faiss_index"):
     os.makedirs("faiss_index")
 
 # Initialize embedding model
-embedding_model = OllamaEmbeddings(model="nomic-embed-text")
+embedding_model = HuggingFaceEmbeddings(
+    model_name="sentence-transformers/all-MiniLM-L6-v2"
+)
 
 # Load existing FAISS index if available
 faiss_index_file = "faiss_index/index.faiss"
